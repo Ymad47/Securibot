@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvel Audit - SecuriBot AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-green-400">🔒 SecuriBot AI</h1>
+            <div>
+                <a href="/" class="px-4 py-2 text-gray-300 hover:text-white">Accueil</a>
+                <a href="/dashboard" class="px-4 py-2 text-gray-300 hover:text-white">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-8 max-w-2xl">
+        <h2 class="text-3xl font-bold mb-8">🔍 Nouvel Audit</h2>
+
+        <form class="bg-gray-800 p-8 rounded-lg space-y-6">
+            <div>
+                <label class="block text-gray-400 mb-2">Cible (Domaine ou IP)</label>
+                <input type="text" placeholder="example.com ou 192.168.1.1" 
+                       class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
+            </div>
+
+            <div>
+                <label class="block text-gray-400 mb-2">Type d'Audit</label>
+                <select class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
+                    <option>Standard ($499) - Web + Network + SSH</option>
+                    <option>Monitoring Mensuel ($299/mois)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-gray-400 mb-2">Email de Contact</label>
+                <input type="email" placeholder="vous@entreprise.com" 
+                       class="w-full px-4 py-3 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600">
+            </div>
+
+            <div class="pt-4">
+                <button type="submit" class="w-full px-8 py-4 bg-green-600 text-lg rounded-lg hover:bg-green-700 transition">
+                    Démarrer l'Audit
+                </button>
+            </div>
+
+            <p class="text-sm text-gray-400 text-center">
+                Paiement sécurisé via Stripe. Rapport livré sous 24-48h.
+            </p>
+        </form>
+    </main>
+</body>
+</html>

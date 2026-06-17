@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecuriBot AI - Audit Cybersécurité Automatisé</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <nav class="bg-gray-800 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-green-400">🔒 SecuriBot AI</h1>
+            <div>
+                <a href="/dashboard" class="px-4 py-2 text-gray-300 hover:text-white">Dashboard</a>
+                <a href="/audit/new" class="px-4 py-2 bg-green-600 rounded hover:bg-green-700">Nouvel Audit</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-8">
+        <section class="text-center py-20">
+            <h2 class="text-5xl font-bold mb-6">Audit de Sécurité <span class="text-green-400">100% Automatisé</span></h2>
+            <p class="text-xl text-gray-400 mb-8">Scan, analyse, rapport et facturation — gérés par IA.</p>
+            <a href="/audit/new" class="inline-block px-8 py-4 bg-green-600 text-lg rounded-lg hover:bg-green-700 transition">
+                Démarrer un Audit Gratuit
+            </a>
+        </section>
+
+        <section class="grid md:grid-cols-3 gap-8 py-12">
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <div class="text-4xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold mb-2">Scan Complet</h3>
+                <p class="text-gray-400">Network, Web, SSH — nmap, nikto, ssh-audit automatisés.</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <div class="text-4xl mb-4">🤖</div>
+                <h3 class="text-xl font-semibold mb-2">Analyse IA</h3>
+                <p class="text-gray-400">NVIDIA Nemotron analyse les vulnérabilités et priorise les risques.</p>
+            </div>
+            <div class="bg-gray-800 p-6 rounded-lg">
+                <div class="text-4xl mb-4">📄</div>
+                <h3 class="text-xl font-semibold mb-2">Rapport Pro</h3>
+                <p class="text-gray-400">PDF détaillé avec recommandations actionnables.</p>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 p-8 rounded-lg mt-12">
+            <h3 class="text-2xl font-bold mb-4">💰 Pricing</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="border border-gray-700 p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold">Audit One-Shot</h4>
+                    <p class="text-3xl font-bold text-green-400 my-4">$499</p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>✅ Scan complet (Web + Network + SSH)</li>
+                        <li>✅ Analyse IA NVIDIA</li>
+                        <li>✅ Rapport PDF professionnel</li>
+                        <li>✅ Livraison 24-48h</li>
+                    </ul>
+                </div>
+                <div class="border border-green-600 p-6 rounded-lg">
+                    <h4 class="text-xl font-semibold">Monitoring Mensuel</h4>
+                    <p class="text-3xl font-bold text-green-400 my-4">$299/mois</p>
+                    <ul class="text-gray-400 space-y-2">
+                        <li>✅ Tout l'audit one-shot</li>
+                        <li>✅ Scans récurrents</li>
+                        <li>✅ Alertes en temps réel</li>
+                        <li>✅ Support prioritaire</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 p-8 mt-20 text-center text-gray-400">
+        <p>SecuriBot AI — Hackathon Nous Research 2026</p>
+        <p class="text-sm mt-2">Propulsé par Hermes Agent + NVIDIA Nemotron + Stripe</p>
+    </footer>
+</body>
+</html>
