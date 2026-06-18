@@ -12,12 +12,14 @@
 
 SecuriBot est un **SaaS d'audit de cybersécurité 100% automatisé** qui :
 
-1. **Scan** votre infrastructure (Web, Network, SSH)
+1. **Scan** votre infrastructure (Web, Network, SSH, Containers)
 2. **Analyse** les vulnérabilités avec NVIDIA Nemotron 3 Ultra
 3. **Génère** un rapport PDF professionnel
 4. **Facture** automatiquement via Stripe
 
 **Stack :** Hermes Agent + FastAPI + HTMX + PostgreSQL + NVIDIA + Stripe
+
+**Outils de scan :** nmap, nikto, ssh-audit, sslscan, **nuclei**
 
 ---
 

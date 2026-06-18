@@ -4,8 +4,8 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/ssl:/etc/nginx/ssl:ro
@@ -51,6 +51,14 @@ services:
       - web
     restart: unless-stopped
 
+  nuclei:
+    image: projectdiscovery/nuclei:latest
+    container_name: securibot-nuclei
+    volumes:
+      - ./reports:/root/reports
+    entrypoint: ["sleep", "infinity"]
+    restart: unless-stopped
+
   db:
     image: postgres:15-alpine
     env_file: .env
@@ -58,7 +66,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      test: ["CMD-SHELL", "pg_isready -U securibot -d securibot"]
       interval: 10s
       timeout: 5s
       retries: 5

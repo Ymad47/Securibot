@@ -15,6 +15,7 @@ Orchestrates security scanning tools for automated audits.
 - `nikto` - Web vulnerability scanner
 - `ssh-audit` - SSH configuration checker
 - `sslscan` - SSL/TLS analysis
+- `nuclei` - Vulnerability scanner with CVE templates
 
 ## Usage
 
@@ -27,8 +28,9 @@ Called by Hermes Agent when an audit request is received.
 3. Run nikto (if web detected)
 4. Run ssh-audit (if SSH detected)
 5. Run sslscan (if HTTPS detected)
-6. Aggregate results
-7. Return to agent for NVIDIA analysis
+6. **Run nuclei (CVE & vulnerability templates)**
+7. Aggregate results
+8. Return to agent for NVIDIA analysis
 
 ## Output Format
 
