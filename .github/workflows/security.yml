@@ -1,0 +1,102 @@
+name: 🔒 Security Scan
+
+on:
+  push:
+    branches: [main, master, dev]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  security:
+    name: Security Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Python SAST
+      - name: Semgrep
+        uses: returntocorp/semgrep-action@v1
+        if: always()
+        with:
+          config: >-
+            p/auto
+
+      - name: Bandit (Python)
+        uses: github/super-linter/slim@v6
+        if: always()
+        env:
+          VALIDATE_PYTHON_BANDIT: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Dependencies
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        if: always()
+        with:
+          python-version: '3.11'
+
+      - name: Pip Audit
+        run: |
+          pip install pip-audit
+          if [ -f requirements.txt ]; then
+            pip-audit -r requirements.txt || true
+          fi
+          for req in $(find . -name "requirements.txt" | grep -v node_modules); do
+            echo "Scanning: $req"
+            pip-audit -r "$req" || true
+          done
+        if: always()
+
+      # Docker
+      - name: Hadolint (Dockerfile)
+        uses: hadolint/hadolint-action@v3.1.0
+        if: always()
+        with:
+          dockerfile: web/Dockerfile
+
+      - name: Trivy (Container images)
+        uses: aquasecurity/trivy-action@master
+        if: always()
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      # Secrets
+      - name: Gitleaks (Secrets detection)
+        uses: gitleaks/gitleaks-action@v2
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+      # IaC
+      - name: Checkov (IaC scanning)
+        uses: bridgecrewio/checkov-action@v12
+        if: always()
+        with:
+          directory: .
+          framework: dockerfile,secrets
+          soft_fail: true
+          output: cli,sarif
+          output_file_path: console,results.sarif
+
+      - name: Upload Checkov results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'results.sarif'

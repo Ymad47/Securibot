@@ -1,4 +1,4 @@
-.PHONY: dev deploy clean logs shell-web shell-hermes backup ssl
+.PHONY: dev deploy clean logs shell-web shell-hermes backup ssl security
 
 dev:
 	docker-compose up --build
@@ -38,3 +38,23 @@ restart:
 
 status:
 	docker-compose ps
+
+security:
+	@echo "🔒 Running local security scans..."
+	@echo ""
+	@echo "1/5 Semgrep (Python SAST)..."
+	@semgrep --config auto web/ || true
+	@echo ""
+	@echo "2/5 Bandit (Python security)..."
+	@bandit -r web/ || true
+	@echo ""
+	@echo "3/5 Pip-audit (dependencies)..."
+	@pip-audit -r web/requirements.txt || true
+	@echo ""
+	@echo "4/5 Hadolint (Dockerfile)..."
+	@hadolint web/Dockerfile || true
+	@echo ""
+	@echo "5/5 Gitleaks (secrets)..."
+	@gitleaks detect --source . --verbose || true
+	@echo ""
+	@echo "✅ Security scan complete!"
